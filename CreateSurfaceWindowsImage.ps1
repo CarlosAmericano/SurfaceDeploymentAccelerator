@@ -1643,7 +1643,7 @@ Function Get-OSWIMFromISO
         # Read WinPEXML file
         [string]$XmlPath = "$WorkingDirPath\Languages.xml"
         [Xml]$LanguagesXML = Get-Content $XmlPath
-        $Editions = $LanguagesXML.Windows10.Editions.$OSSKU.Variants.Variant
+        $Editions = $LanguagesXML.Windows.Editions.$OSSKU.Variants.Variant
 
         Write-Output "Checking $TempWIM for valid images..." | Receive-Output -Color White -LogLevel 1 -LineNumber "$($Invocation.MyCommand.Name):$( & {$MyInvocation.ScriptLineNumber})"
         $OSImageFound = $False
@@ -1660,6 +1660,7 @@ Function Get-OSWIMFromISO
                     $ImageVersion = $OSImage.Version
                     $ImageArch = $OSImage.Architecture
                     $OSImageFound = $True
+                    Break
                 }
                 Else
                 {
@@ -1766,6 +1767,7 @@ Function Get-OSWIMFromISO
                     {
                         10.0.17763 {"1809"}
                         10.0.19041 {"2004"}
+                        10.0.22000 {"21H2"}
                     }
                 }
 
